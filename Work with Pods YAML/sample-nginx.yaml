@@ -1,0 +1,30 @@
+apiVersion: v1 # This is a key-value pair
+kind: Pod 
+metadata:      # This is a dictionary
+  name: nginx-pod 
+  labels:
+    app: nginx
+    type: demo-nginx-pod
+spec:
+  containers:  # This is a list of dictionaries
+  - name: nginx-container 
+    image: nginx:latest
+    ports:
+    - containerPort: 80 
+
+  - name: sidecar-container
+    image: busybox:latest
+    command: ["sleep", "3600"] # This container will run a sleep command to keep it alive
+
+
+# How to use this YAML file:
+# 1. Save the content of this file to a file named 'sample-nginx.yaml
+# 2. Apply the configuration to your Kubernetes cluster using the command:
+#    kubectl apply -f sample-nginx.yaml
+# 3. Verify that the Pod has been created and is running using the command:
+#    kubectl get pods -l app=nginx
+# 4. You can also check the logs of the nginx container using the command:
+#    kubectl logs -l app=nginx
+# 5. To access the nginx server, you can port-forward the Pod to your local machine using the command:
+#    kubectl port-forward pod/nginx-pod 8080:80
+#    Then you can access the nginx server at http://localhost:8080 in your web browser.

@@ -1,0 +1,22 @@
+# This yaml file defines a Kubernetes Pod configuration. 
+# It specifies the API version, kind of resource, metadata, and the specification for the Pod.
+
+apiVersion: v1
+kind: Pod
+metadata:
+  name: demo-pod
+  labels:
+    app: demo
+    type: frontend
+spec:
+  containers:
+  - name: nginx-demo
+    image: nginx:latest
+    ports:
+    - containerPort: 80
+
+# - The apiVersion is set to v1, which is the version of the Kubernetes API being used.
+# - The kind is Pod, indicating that this configuration is for a Pod resource.
+# - The metadata section includes the name of the Pod and some labels for categorization.
+# - The spec section defines the desired state of the Pod, including the containers that should be running. 
+#   In this case, it specifies a single container using the nginx image and exposing port 80.
