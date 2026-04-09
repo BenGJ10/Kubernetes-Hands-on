@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx-rc
+  labels:
+    app: nginx
+    type: proxy
+
+spec:
+  template:
+    metadata:
+      labels:
+        app: nginx-pod
+        type: proxy
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+  replicas: 3
+
+# This is a sample YAML file that defines a ReplicationController in Kubernetes.
+# The apiVersion is set to v1, which is the version of the Kubernetes API being used.
+# The kind is ReplicationController, indicating that this configuration is for a ReplicationController resource.
+# The metadata section includes the name of the ReplicationController and some labels for categorization.
+# The spec section defines the desired state of the ReplicationController, including the template for the Pods it manages and the number of replicas.
+#  The template section specifies the metadata and specification for the Pods that will be created by the ReplicationController. 
+#   In this case, it defines a single container using the nginx image version 1.7.9 and exposing port 80.
+#  The replicas field indicates that the ReplicationController should maintain 3 replicas of the specified Pod template.
