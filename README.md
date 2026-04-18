@@ -9,9 +9,9 @@ This repository provides a practical introduction to `Kubernetes` concepts and `
 This repository is organized from foundational Kubernetes concepts to AWS EKS-oriented guidance:
 
 | Area | Purpose |
-|---|---|
+|------|---------|
 | [Beginner Concepts](Beginner%20Concepts/) | Conceptual notes for Pods, Services, Deployments, ReplicaSets, and rollout strategy |
-|[Work with Pods YAML](Work%20with%20Pods%20YAML/) | Manifest examples for Pod, RC, ReplicaSet, and Deployment |
+| [Work with Pods YAML](Work%20with%20Pods%20YAML/) | Manifest examples for Pod, RC, ReplicaSet, and Deployment |
 | [Introduction to EKS](Introduction%20to%20EKS/) | Amazon EKS overview, architecture, and operational context |
 
 ---
