@@ -1,0 +1,39 @@
+# This manifest file contains the Deployment and Service definitions for the User Management Microservice that connects 
+# to the MySQL database. The microservice performs CRUD operations on user data and is exposed via a Kubernetes Service for 
+# internal communication within the cluster. The microservice is configured to use environment variables to connect to the MySQL database,
+# which is defined in the mysql-deployment.yaml manifest. The microservice image used in this example is a sample image that can be replaced with your own custom image if needed.
+
+apiVersion: apps/v1
+kind: Deployment 
+metadata:
+  name: usermgmt-microservice
+  labels:
+    app: usermgmt-restapp
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: usermgmt-restapp
+  template:  
+    metadata:
+      labels: 
+        app: usermgmt-restapp
+    spec:
+      containers:
+        - name: usermgmt-restapp
+          # A sample microservice image that connects to MySQL database and performs CRUD operations on user data
+          image: stacksimplify/kube-usermanagement-microservice:1.0.0
+          ports: 
+            - containerPort: 8095          
+          # Environment variables to connect to MySQL database
+          env:
+            - name: DB_HOSTNAME
+              value: "mysql"            
+            - name: DB_PORT
+              value: "3306"            
+            - name: DB_NAME
+              value: "usermgmt"            
+            - name: DB_USERNAME
+              value: "root"            
+            - name: DB_PASSWORD
+              value: "dbpassword"            

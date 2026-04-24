@@ -1,0 +1,12 @@
+# This manifest creates a ConfigMap named "usermanagement-dbcreation-script" that contains a SQL script for creating a MySQL database named "usermgmt". 
+# The SQL script first drops the database if it already exists and then creates a new database. 
+# This ConfigMap can be used by a MySQL initialization container to set up the database when the MySQL pod is first created.
+
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: usermanagement-dbcreation-script
+data: 
+  mysql_usermgmt.sql: |-
+    DROP DATABASE IF EXISTS usermgmt;
+    CREATE DATABASE usermgmt; 

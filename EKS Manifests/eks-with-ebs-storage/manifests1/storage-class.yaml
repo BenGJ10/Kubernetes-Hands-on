@@ -1,0 +1,10 @@
+# This manifest creates a StorageClass named "ebs-sc" that uses the AWS EBS CSI driver 
+# to provision storage volumes. The "WaitForFirstConsumer" volume binding mode ensures that the volume is not provisioned 
+# until a pod that requires the volume is scheduled, which can help optimize resource usage and reduce costs.
+
+apiVersion: storage.k8s.io/v1
+kind: StorageClass
+metadata: 
+  name: ebs-sc
+provisioner: ebs.csi.aws.com
+volumeBindingMode: WaitForFirstConsumer 

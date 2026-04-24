@@ -1,0 +1,45 @@
+# This manifest creates a Deployment for MySQL with a single replica. It uses the mysql:5.6 image and sets the root password using an environment variable.
+# The Deployment uses a Recreate strategy, which means that when updating the Deployment, all existing pods will
+# be killed before new ones are created. The MySQL container exposes port 3306 and mounts two volumes: one for persistent storage and another for initialization scripts.
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: mysql
+spec: 
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mysql
+  strategy: 
+    type: Recreate # Recreate the database
+  template: 
+    metadata: 
+      labels: 
+        app: mysql
+    spec: 
+      containers:
+        - name: mysql
+          image: mysql:5.6
+          env:
+            - name: MYSQL_ROOT_PASSWORD
+              value: dbpassword
+          ports:
+            - containerPort: 3306
+              name: mysql    
+          
+          volumeMounts:
+            - name: mysql-persistent-storage
+              mountPath: /var/lib/mysql    
+              # This will run the specified script at the creation time
+            - name: usermanagement-dbcreation-script
+              mountPath: /docker-entrypoint-initdb.d # https://hub.docker.com/_/mysql Refer Initializing a fresh instance                                            
+      
+      # Define the volumes for persistent storage and initialization scripts
+      volumes: 
+        - name: mysql-persistent-storage
+          persistentVolumeClaim:
+            claimName: ebs-mysql-pv-claim
+        - name: usermanagement-dbcreation-script
+          configMap:
+            name: usermanagement-dbcreation-script

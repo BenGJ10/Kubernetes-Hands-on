@@ -1,0 +1,14 @@
+# Creates a PersistentVolumeClaim named "ebs-mysql-pv-claim" that requests 4Gi of storage using the "ebs-sc" StorageClass.
+
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: ebs-mysql-pv-claim
+spec: 
+  # The access mode "ReadWriteOnce" allows the volume to be mounted as read-write by a single node
+  accessModes:
+    - ReadWriteOnce
+  storageClassName: ebs-sc # Reference to the StorageClass defined in storage-class.yaml
+  resources: 
+    requests:
+      storage: 4Gi # Requesting 4Gi of storage for the PersistentVolumeClaim
